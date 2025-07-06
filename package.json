@@ -2,7 +2,9 @@
   "name": "gitig",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "bin": {
+    "gitig": "bin/index.js"
+  },
   "scripts": {
     "build": "tsup"
   },
