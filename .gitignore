@@ -1,0 +1,30 @@
+# cli project git ignore file
+
+node_modules
+.env
+.DS_Store
+
+# IDE files
+.idea
+.vscode
+
+# build files
+dist
+build
+
+# logs
+logs
+
+# cache
+.cache
+
+# local environment files
+.env.local
+.env.*.local
+
+# test files
+coverage
+.nyc_output
+
+# editor config
+.editorconfig
