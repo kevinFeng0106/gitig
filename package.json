@@ -1,6 +1,6 @@
 {
-  "name": "gitig",
-  "version": "1.0.0",
+  "name": "@lordmoon/gitig",
+  "version": "0.0.1-mvp",
   "description": "",
   "bin": {
     "gitig": "bin/index.js"
