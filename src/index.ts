@@ -1,7 +1,6 @@
 import cac from "cac";
-import fetch from "node-fetch";
 import fs from "fs";
-import { exec, execSync } from "child_process";
+import { execSync } from "child_process";
 
 const cli = cac("gitig");
 
