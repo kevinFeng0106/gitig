@@ -1,12 +1,13 @@
 import cac from "cac";
 import fetch from "node-fetch";
 import fs from "fs";
+import { exec, execSync } from "child_process";
 
 const cli = cac("gitig");
 
 const genTypeWhiteList = ["frontend"];
 
-const RAW_FILE_URL = "https://gitee.com/lord-moon/gitig-template/raw/master";
+const RAW_FILE_URL = "https://raw.githubusercontent.com/kevinFeng0106/gitig-template/refs/heads/main";
 
 cli
   .command("gen <type>", "Create a new .gitignore file with the specified type")
@@ -20,17 +21,11 @@ cli
     const targetRawFileUrl = `${RAW_FILE_URL}/${type}/general_gitignore.txt`;
     console.log(`[gitig]: Downloading .gitignore file from ${targetRawFileUrl} ...`);
 
-    const reponse = await fetch(targetRawFileUrl, {
-      method: "GET",
-      headers: {
-        "Content-Type": "text/plain",
-      },
-    });
-    const text = await reponse.text();
+    const fileContent = execSync(`curl -s ${targetRawFileUrl}`);
 
     const cwd = process.cwd();
     console.log("[gitig]: Writing .gitignore file to " + cwd + " ...");
-    fs.writeFileSync(`${cwd}/.gitignore`, text);
+    fs.writeFileSync(`${cwd}/.gitignore`, fileContent);
   });
 
 cli.help();

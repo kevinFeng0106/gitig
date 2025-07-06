@@ -23,11 +23,11 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 
 // src/index.ts
 var import_cac = __toESM(require("cac"));
-var import_node_fetch = __toESM(require("node-fetch"));
 var import_fs = __toESM(require("fs"));
+var import_child_process = require("child_process");
 var cli = (0, import_cac.default)("gitig");
 var genTypeWhiteList = ["frontend"];
-var RAW_FILE_URL = "https://gitee.com/lord-moon/gitig-template/raw/master";
+var RAW_FILE_URL = "https://raw.githubusercontent.com/kevinFeng0106/gitig-template/refs/heads/main";
 cli.command("gen <type>", "Create a new .gitignore file with the specified type").action(async (type) => {
   console.log("[gitig]: Generating .gitignore file with type " + type + " ...");
   if (!genTypeWhiteList.includes(type)) {
@@ -36,16 +36,10 @@ cli.command("gen <type>", "Create a new .gitignore file with the specified type"
   ;
   const targetRawFileUrl = `${RAW_FILE_URL}/${type}/general_gitignore.txt`;
   console.log(`[gitig]: Downloading .gitignore file from ${targetRawFileUrl} ...`);
-  const reponse = await (0, import_node_fetch.default)(targetRawFileUrl, {
-    method: "GET",
-    headers: {
-      "Content-Type": "text/plain"
-    }
-  });
-  const text = await reponse.text();
+  const fileContent = (0, import_child_process.execSync)(`curl -s ${targetRawFileUrl}`);
   const cwd = process.cwd();
   console.log("[gitig]: Writing .gitignore file to " + cwd + " ...");
-  import_fs.default.writeFileSync(`${cwd}/.gitignore`, text);
+  import_fs.default.writeFileSync(`${cwd}/.gitignore`, fileContent);
 });
 cli.help();
 cli.parse();
