@@ -6,7 +6,7 @@ import { execSync } from "child_process";
 
 const cli = cac("gitig");
 
-const genTypeWhiteList = ["frontend"];
+const genTypeList = ["frontend", "common"];
 
 const RAW_FILE_URL = "https://raw.githubusercontent.com/kevinFeng0106/gitig-template/refs/heads/main";
 
@@ -15,7 +15,7 @@ cli
   .action(async (type) => {
     console.log("[gitig]: Generating .gitignore file with type " + type + " ...");
 
-    if(!genTypeWhiteList.includes(type)) {
+    if(!genTypeList.includes(type)) {
       throw new Error("[gitig]: Invalid type, please check the type list.");
     };
 

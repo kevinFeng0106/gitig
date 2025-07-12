@@ -27,11 +27,11 @@ var import_cac = __toESM(require("cac"));
 var import_fs = __toESM(require("fs"));
 var import_child_process = require("child_process");
 var cli = (0, import_cac.default)("gitig");
-var genTypeWhiteList = ["frontend"];
+var genTypeList = ["frontend", "common"];
 var RAW_FILE_URL = "https://raw.githubusercontent.com/kevinFeng0106/gitig-template/refs/heads/main";
 cli.command("gen <type>", "Create a new .gitignore file with the specified type").action(async (type) => {
   console.log("[gitig]: Generating .gitignore file with type " + type + " ...");
-  if (!genTypeWhiteList.includes(type)) {
+  if (!genTypeList.includes(type)) {
     throw new Error("[gitig]: Invalid type, please check the type list.");
   }
   ;
